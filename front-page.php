@@ -1,9 +1,11 @@
+<?php wp_enqueue_style('mapboxgl'); ?>
+<?php wp_enqueue_script('mapboxgl'); ?>
 <?php get_header(); ?>
 
 	<section class="section">
 		<div class="container">
-      <div class="columns">
-        <div class="column">
+      <div class="home-hero">
+        <div class="home-hero__tile home-hero--text">
           <h1 class="title is-large"><?php the_title(); ?></h1>
           <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 						<div class="entry">
@@ -11,8 +13,17 @@
 						</div>
           <?php endwhile; endif; ?>
         </div>
-        <div class="column">
-          map
+        <div class="home-hero__tile home-hero--map">
+					<div id='map'></div>
+					<script>
+						mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuam95Y2UiLCJhIjoiNDc1Y2UwZDdkMjRkMmJkNmYzZDViNmMxMTE4ZjA3NTIifQ.FDI9-JFiGuBodhe1aIX8DA';
+						const map = new mapboxgl.Map({
+						container: 'map',
+						style: 'mapbox://styles/danjoyce/cjpba9yq9ac6z2snz6lplz9mx',
+						center: [-95.302483, 29.737316],
+						zoom: 12.8
+						});
+					</script>
         </div>
       </div>
     </div>
