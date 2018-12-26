@@ -414,7 +414,7 @@ function wps_highlight_results($text){
 
   global $wp_query;
 
-  if($wp_query->is_search){
+  if($wp_query->is_search && !is_admin()){
   $sr = get_query_var('s');
   $keys = explode(" ",$sr);
   $text = preg_replace('/('.implode('|', $keys) .')/iu', '<strong class="search-term">$0</strong>', $text);
