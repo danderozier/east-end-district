@@ -4,7 +4,7 @@
 		<meta charset="<?php bloginfo('charset'); ?>">
 		<title><?php wp_title(''); ?><?php if(wp_title('', false)) { echo ' :'; } ?> <?php bloginfo('name'); ?></title>
 
-		<link href="https://fonts.googleapis.com/css?family=Barlow:400,400i,700,700i|Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,400i,700,700i|Material+Icons" rel="stylesheet">
 
 		<?php get_template_part('fonts/fonts'); ?>
 

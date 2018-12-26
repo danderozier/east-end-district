@@ -35,7 +35,7 @@ if (function_exists('add_theme_support'))
     add_image_size('large', 700, '', true); // Large Thumbnail
     add_image_size('medium', 250, '', true); // Medium Thumbnail
     add_image_size('small', 120, '', true); // Small Thumbnail
-    add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
+    add_image_size('gallery-thumbnail', 600, 600, true);
 
     // Add post formats
     add_theme_support( 'post-formats', array( 'link' ) );
@@ -531,7 +531,9 @@ function create_post_type_html5()
 
 
 function html5_image_size_names( $sizes ) {
-    $sizes['extra-large'] = 'Extra Large';
+    $sizes['extra-large'] = __( 'Extra Large', 'html5blank' );
+    $sizes['gallery-thumbnail'] = __( 'Gallery Thumbnail', 'html5blank' );
+    $sizes['hero'] = __( 'Hero Image', 'html5blank' );
     return $sizes;
 }
 add_filter( 'image_size_names_choose', 'html5_image_size_names', 11, 1 );

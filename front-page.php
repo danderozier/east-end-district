@@ -20,8 +20,8 @@
 						const map = new mapboxgl.Map({
 						container: 'map',
 						style: 'mapbox://styles/danjoyce/cjpba9yq9ac6z2snz6lplz9mx',
-						center: [-95.302483, 29.737316],
-						zoom: 12.8
+						center: [-95.318,29.737],
+						zoom: 12
 						});
 					</script>
         </div>
@@ -72,7 +72,7 @@
 		 <?php endif; ?>
 	<?php endif; ?>
 
-	<?php $links_query = get_bookmarks(); ?>
+	<?php $links_query = get_bookmarks(array('orderby' => 'rating')); ?>
 	<?php if( count($links_query) > 0 ): ?>
 		<section class="section is-light">
 	    <div class="container">
