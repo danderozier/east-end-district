@@ -399,16 +399,6 @@ add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [htm
 // Shortcodes above would be nested like this -
 // [html5_shortcode_demo] [html5_shortcode_demo_2] Here's the page title! [/html5_shortcode_demo_2] [/html5_shortcode_demo]
 
-function jptweak_remove_share() {
-    remove_filter( 'the_content', 'sharing_display', 19 );
-    remove_filter( 'the_excerpt', 'sharing_display', 19 );
-    if ( class_exists( 'Jetpack_Likes' ) ) {
-        remove_filter( 'the_content', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1 );
-    }
-}
-
-add_action( 'loop_start', 'jptweak_remove_share' );
-
 
 function wps_highlight_results($text){
 

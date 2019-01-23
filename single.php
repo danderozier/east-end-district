@@ -44,18 +44,6 @@
 
 						<!-- post meta -->
 						<ul class="meta pull-out">
-							<li>
-								<?php
-									if ( function_exists( 'sharing_display' ) ) {
-										sharing_display( '', true );
-									}
-
-									if ( class_exists( 'Jetpack_Likes' ) ) {
-										$custom_likes = new Jetpack_Likes;
-										echo $custom_likes->post_likes( '' );
-									}
-								?>
-							</li>
 							<li>Posted by <?php the_author(); ?></li>
 							<li><?php the_tags( 'Tagged ', ', '); ?></li>
 							<li><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'html5blank' ), __( '1 Comment', 'html5blank' ), __( '% Comments', 'html5blank' )); ?></li>
