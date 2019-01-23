@@ -14,7 +14,7 @@
 			<!-- Left Rail -->
 			<div class="layout__left-rail">
 				<p class="subtitle search-results">
-					<?php echo sprintf( __( 'Showing %s search results for “%s”', 'html5blank' ), $wp_query->found_posts, get_search_query() ); ?>
+					<?php echo sprintf( __( 'Showing %s search results for “%s”', 'eastenddistrict' ), $wp_query->found_posts, get_search_query() ); ?>
 				</p>
 			</div>
 			<!-- /Left Rail -->
@@ -32,7 +32,7 @@
 
 					<!-- article -->
 					<article>
-						<h2><?php _e( 'Sorry, no results.', 'html5blank' ); ?></h2>
+						<h2><?php _e( 'Sorry, no results.', 'eastenddistrict' ); ?></h2>
 					</article>
 					<!-- /article -->
 

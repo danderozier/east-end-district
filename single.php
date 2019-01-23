@@ -46,7 +46,7 @@
 						<ul class="meta pull-out">
 							<li>Posted by <?php the_author(); ?></li>
 							<li><?php the_tags( 'Tagged ', ', '); ?></li>
-							<li><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'html5blank' ), __( '1 Comment', 'html5blank' ), __( '% Comments', 'html5blank' )); ?></li>
+							<li><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'eastenddistrict' ), __( '1 Comment', 'eastenddistrict' ), __( '% Comments', 'eastenddistrict' )); ?></li>
 							<?php edit_post_link(); ?>
 						</ul>
 
@@ -68,7 +68,7 @@
 					<!-- article -->
 					<article>
 
-						<h1><?php _e( 'Sorry, nothing to display.', 'html5blank' ); ?></h1>
+						<h1><?php _e( 'Sorry, nothing to display.', 'eastenddistrict' ); ?></h1>
 
 					</article>
 					<!-- /article -->

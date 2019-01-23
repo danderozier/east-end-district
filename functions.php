@@ -1,15 +1,9 @@
 <?php
 /*
- *  Author: Todd Motto | @toddmotto
- *  URL: html5blank.com | @html5blank
- *  Custom functions, support, custom post types and more.
+ *  East End District
+ *  URL: eastenddistrict.com | @eastenddistrict
+ *  Big thanks to html5blank.com for helpful boilerplate.
  */
-
-/*------------------------------------*\
-	External Modules/Files
-\*------------------------------------*/
-
-// Load any external files you have here
 
 /*------------------------------------*\
 	Theme Support
@@ -25,53 +19,34 @@ if (function_exists('add_theme_support'))
     // Add Menu Support
     add_theme_support('menus');
 
-    // Add HTML5 Support (how is this not the default in 2018?)
+    // Add HTML5 Support (It's 2019 -- how is this not the default?)
     add_theme_support('html5', array('gallery', 'caption'));
 
     // Add Thumbnail Theme Support
     add_theme_support('post-thumbnails');
-    add_image_size('hero', 1600, 600, true); // Large Thumbnail
-    add_image_size('extra-large', 1200, '', true); // Extra Large Thumbnail
-    add_image_size('large', 700, '', true); // Large Thumbnail
-    add_image_size('medium', 250, '', true); // Medium Thumbnail
-    add_image_size('small', 120, '', true); // Small Thumbnail
+    add_image_size('hero', 1600, 600, true);
+    add_image_size('extra-large', 1200, '', true);
+    add_image_size('large', 700, '', true);
+    add_image_size('medium', 250, '', true);
+    add_image_size('small', 120, '', true);
     add_image_size('gallery-thumbnail', 600, 600, true);
 
-    // Add post formats
+    // Add "link" post formats for that Gruber-style
     add_theme_support( 'post-formats', array( 'link' ) );
-
-    // Add Support for Custom Backgrounds - Uncomment below if you're going to use
-    /*add_theme_support('custom-background', array(
-	'default-color' => 'FFF',
-	'default-image' => get_template_directory_uri() . '/img/bg.jpg'
-    ));*/
-
-    // Add Support for Custom Header - Uncomment below if you're going to use
-    /*add_theme_support('custom-header', array(
-	'default-image'			=> get_template_directory_uri() . '/img/headers/default.jpg',
-	'header-text'			=> false,
-	'default-text-color'		=> '000',
-	'width'				=> 1000,
-	'height'			=> 198,
-	'random-default'		=> false,
-	'wp-head-callback'		=> $wphead_cb,
-	'admin-head-callback'		=> $adminhead_cb,
-	'admin-preview-callback'	=> $adminpreview_cb
-    ));*/
 
     // Enables post and comment RSS feed links to head
     add_theme_support('automatic-feed-links');
 
-    // Localisation Support
-    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+    // Localization Support
+    load_theme_textdomain('eastenddistrict', get_template_directory() . '/languages');
 }
 
 /*------------------------------------*\
 	Functions
 \*------------------------------------*/
 
-// HTML5 Blank navigation
-function html5blank_nav()
+// East End District navigation
+function eastenddistrict_nav()
 {
 	wp_nav_menu(
 	array(
@@ -95,26 +70,27 @@ function html5blank_nav()
 	);
 }
 
-// Load HTML5 Blank scripts (header.php)
-function html5blank_header_scripts()
+// Load East End District scripts (header.php)
+function eastenddistrict_header_scripts()
 {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 
+      // Register Mapbox API script
       wp_register_script('mapboxgl', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js', array());
 
     	wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0'); // Conditionizr
         wp_enqueue_script('conditionizr'); // Enqueue it!
 
-        wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
+      wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
         wp_enqueue_script('modernizr'); // Enqueue it!
 
-        wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
-        wp_enqueue_script('html5blankscripts'); // Enqueue it!
+      wp_register_script('eastenddistrictscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
+        wp_enqueue_script('eastenddistrictscripts'); // Enqueue it!
     }
 }
 
-// Load HTML5 Blank conditional scripts
-function html5blank_conditional_scripts()
+// Load East End District conditional scripts
+function eastenddistrict_conditional_scripts()
 {
     if (is_page('pagenamehere')) {
         wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
@@ -122,23 +98,23 @@ function html5blank_conditional_scripts()
     }
 }
 
-// Load HTML5 Blank styles
-function html5blank_styles()
+// Load East End District styles
+function eastenddistrict_styles()
 {
     wp_register_style('mapboxgl', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css');
 
     wp_register_style('normalize', get_template_directory_uri() . '/normalize.css', array(), '1.0', 'all');
     wp_enqueue_style('normalize'); // Enqueue it!
 
-    wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
-    wp_enqueue_style('html5blank'); // Enqueue it!
+    wp_register_style('eastenddistrict', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
+    wp_enqueue_style('eastenddistrict'); // Enqueue it!
 }
 
-// Register HTML5 Blank Navigation
+// Register East End District Navigation
 function register_html5_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
+        'header-menu' => __('Header Menu', 'eastenddistrict'), // Main Navigation
     ));
 }
 
@@ -182,8 +158,8 @@ function add_slug_to_body_class($classes)
 if (function_exists('register_sidebar'))
 {
     register_sidebar(array(
-        'name' => __('Sidebar', 'html5blank'),
-        'description' => __('Widgets for the site sidebar', 'html5blank'),
+        'name' => __('Sidebar', 'eastenddistrict'),
+        'description' => __('Widgets for the site sidebar', 'eastenddistrict'),
         'id' => 'widget-area-sidebar',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
@@ -192,8 +168,8 @@ if (function_exists('register_sidebar'))
     ));
 
     register_sidebar(array(
-        'name' => __('Footer', 'html5blank'),
-        'description' => __('Widgets for the site footer', 'html5blank'),
+        'name' => __('Footer', 'eastenddistrict'),
+        'description' => __('Widgets for the site footer', 'eastenddistrict'),
         'id' => 'widget-area-footer',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
@@ -259,7 +235,7 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 function html5_blank_view_article($more)
 {
     global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'html5blank') . '</a>';
+    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'eastenddistrict') . '</a>';
 }
 
 // Remove Admin bar
@@ -282,7 +258,7 @@ function remove_thumbnail_dimensions( $html )
 }
 
 // Custom Gravatar in Settings > Discussion
-function html5blankgravatar ($avatar_defaults)
+function eastenddistrictgravatar ($avatar_defaults)
 {
     $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
     $avatar_defaults[$myavatar] = "Custom Gravatar";
@@ -300,7 +276,7 @@ function enable_threaded_comments()
 }
 
 // Custom Comments Callback
-function html5blankcomments($comment, $args, $depth)
+function eastenddistrictcomments($comment, $args, $depth)
 {
 	$GLOBALS['comment'] = $comment;
 	extract($args, EXTR_SKIP);
@@ -348,12 +324,12 @@ function html5blankcomments($comment, $args, $depth)
 \*------------------------------------*/
 
 // Add Actions
-add_action('init', 'html5blank_header_scripts'); // Add Custom Scripts to wp_head
-add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditional Page Scripts
+add_action('init', 'eastenddistrict_header_scripts'); // Add Custom Scripts to wp_head
+add_action('wp_print_scripts', 'eastenddistrict_conditional_scripts'); // Add Conditional Page Scripts
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
+add_action('wp_enqueue_scripts', 'eastenddistrict_styles'); // Add Theme Stylesheet
+add_action('init', 'register_html5_menu'); // Add East End District Menu
+add_action('init', 'create_post_type_html5'); // Add our East End District Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
@@ -372,7 +348,7 @@ remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters
-add_filter('avatar_defaults', 'html5blankgravatar'); // Custom Gravatar in Settings > Discussion
+add_filter('avatar_defaults', 'eastenddistrictgravatar'); // Custom Gravatar in Settings > Discussion
 add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
 add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
@@ -489,18 +465,18 @@ function create_post_type_html5()
     register_post_type('html5-blank', // Register Custom Post Type
         array(
         'labels' => array(
-            'name' => __('HTML5 Blank Custom Post', 'html5blank'), // Rename these to suit
-            'singular_name' => __('HTML5 Blank Custom Post', 'html5blank'),
-            'add_new' => __('Add New', 'html5blank'),
-            'add_new_item' => __('Add New HTML5 Blank Custom Post', 'html5blank'),
-            'edit' => __('Edit', 'html5blank'),
-            'edit_item' => __('Edit HTML5 Blank Custom Post', 'html5blank'),
-            'new_item' => __('New HTML5 Blank Custom Post', 'html5blank'),
-            'view' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'view_item' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'search_items' => __('Search HTML5 Blank Custom Post', 'html5blank'),
-            'not_found' => __('No HTML5 Blank Custom Posts found', 'html5blank'),
-            'not_found_in_trash' => __('No HTML5 Blank Custom Posts found in Trash', 'html5blank')
+            'name' => __('East End District Custom Post', 'eastenddistrict'), // Rename these to suit
+            'singular_name' => __('East End District Custom Post', 'eastenddistrict'),
+            'add_new' => __('Add New', 'eastenddistrict'),
+            'add_new_item' => __('Add New East End District Custom Post', 'eastenddistrict'),
+            'edit' => __('Edit', 'eastenddistrict'),
+            'edit_item' => __('Edit East End District Custom Post', 'eastenddistrict'),
+            'new_item' => __('New East End District Custom Post', 'eastenddistrict'),
+            'view' => __('View East End District Custom Post', 'eastenddistrict'),
+            'view_item' => __('View East End District Custom Post', 'eastenddistrict'),
+            'search_items' => __('Search East End District Custom Post', 'eastenddistrict'),
+            'not_found' => __('No East End District Custom Posts found', 'eastenddistrict'),
+            'not_found_in_trash' => __('No East End District Custom Posts found in Trash', 'eastenddistrict')
         ),
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
@@ -510,7 +486,7 @@ function create_post_type_html5()
             'editor',
             'excerpt',
             'thumbnail'
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
+        ), // Go to Dashboard Custom East End District post for supports
         'can_export' => true, // Allows export in Tools > Export
         'taxonomies' => array(
             'post_tag',
@@ -521,9 +497,9 @@ function create_post_type_html5()
 
 
 function html5_image_size_names( $sizes ) {
-    $sizes['extra-large'] = __( 'Extra Large', 'html5blank' );
-    $sizes['gallery-thumbnail'] = __( 'Gallery Thumbnail', 'html5blank' );
-    $sizes['hero'] = __( 'Hero Image', 'html5blank' );
+    $sizes['extra-large'] = __( 'Extra Large', 'eastenddistrict' );
+    $sizes['gallery-thumbnail'] = __( 'Gallery Thumbnail', 'eastenddistrict' );
+    $sizes['hero'] = __( 'Hero Image', 'eastenddistrict' );
     return $sizes;
 }
 add_filter( 'image_size_names_choose', 'html5_image_size_names', 11, 1 );
