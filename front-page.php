@@ -1,5 +1,3 @@
-<?php wp_enqueue_style('mapboxgl'); ?>
-<?php wp_enqueue_script('mapboxgl'); ?>
 <?php get_header(); ?>
 
 	<section class="section">

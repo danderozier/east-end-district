@@ -70,55 +70,71 @@ function eastenddistrict_nav()
 	);
 }
 
-// Load East End District scripts (header.php)
+// Load scripts (header.php)
+//
 function eastenddistrict_header_scripts()
 {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 
-      // Register Mapbox API script
+      // Register Mapbox API script, but don't enqueue it.
       wp_register_script('mapboxgl', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js', array());
 
-    	wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0'); // Conditionizr
-        wp_enqueue_script('conditionizr'); // Enqueue it!
+      // Register and enqueue Conditionizr, Modernizr, and our scripts.js.
+    	wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0');
+        wp_enqueue_script('conditionizr');
 
-      wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
-        wp_enqueue_script('modernizr'); // Enqueue it!
+      wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1');
+        wp_enqueue_script('modernizr');
 
-      wp_register_script('eastenddistrictscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
-        wp_enqueue_script('eastenddistrictscripts'); // Enqueue it!
+      wp_register_script('eastenddistrictscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0');
+        wp_enqueue_script('eastenddistrictscripts');
     }
 }
 
-// Load East End District conditional scripts
+// Load conditional scripts
+//
 function eastenddistrict_conditional_scripts()
 {
-    if (is_page('pagenamehere')) {
-        wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
-        wp_enqueue_script('scriptname'); // Enqueue it!
+    // Only load Mapbox on the front page.
+    if (is_front_page()) {
+        wp_enqueue_script('mapboxgl');
     }
 }
 
-// Load East End District styles
+// Load styles
+//
 function eastenddistrict_styles()
 {
+    // Register but don't enqueue Mapbox styles
     wp_register_style('mapboxgl', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css');
 
+    // Register and enqueue Normalize and our style.css
     wp_register_style('normalize', get_template_directory_uri() . '/normalize.css', array(), '1.0', 'all');
-    wp_enqueue_style('normalize'); // Enqueue it!
+    wp_enqueue_style('normalize');
 
     wp_register_style('eastenddistrict', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
-    wp_enqueue_style('eastenddistrict'); // Enqueue it!
+    wp_enqueue_style('eastenddistrict');
+}
+
+// Load conditional styles
+//
+function eastenddistrict_conditional_styles()
+{
+    // Only load Mapbox styles on the front page.
+    if (is_front_page()) {
+        wp_enqueue_style('mapboxgl');
+    }
 }
 
 // Register East End District Navigation
 function register_html5_menu()
 {
-    register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => __('Header Menu', 'eastenddistrict'), // Main Navigation
+    register_nav_menus(array(
+        'header-menu' => __('Header Menu', 'eastenddistrict')
     ));
 }
 
-// Remove the <div> surrounding the dynamic navigation to cleanup markup
+// Remove the <div> surrounding the dynamic navigation for cleaner markup
 function my_wp_nav_menu_args($args = '')
 {
     $args['container'] = false;
@@ -238,7 +254,7 @@ function html5_blank_view_article($more)
     return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'eastenddistrict') . '</a>';
 }
 
-// Remove Admin bar
+// Remove Admin bar?
 function remove_admin_bar()
 {
     return false;
@@ -328,8 +344,8 @@ add_action('init', 'eastenddistrict_header_scripts'); // Add Custom Scripts to w
 add_action('wp_print_scripts', 'eastenddistrict_conditional_scripts'); // Add Conditional Page Scripts
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 add_action('wp_enqueue_scripts', 'eastenddistrict_styles'); // Add Theme Stylesheet
+add_action('wp_enqueue_scripts', 'eastenddistrict_conditional_styles'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add East End District Menu
-add_action('init', 'create_post_type_html5'); // Add our East End District Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
@@ -451,73 +467,6 @@ function my_post_gallery($output, $attr) {
     $output .= "</div>\n";
 
     return $output;
-}
-
-/*------------------------------------*\
-	Custom Post Types
-\*------------------------------------*/
-
-// Create 1 Custom Post type for a Demo, called HTML5-Blank
-function create_post_type_html5()
-{
-    register_taxonomy_for_object_type('category', 'html5-blank'); // Register Taxonomies for Category
-    register_taxonomy_for_object_type('post_tag', 'html5-blank');
-    register_post_type('html5-blank', // Register Custom Post Type
-        array(
-        'labels' => array(
-            'name' => __('East End District Custom Post', 'eastenddistrict'), // Rename these to suit
-            'singular_name' => __('East End District Custom Post', 'eastenddistrict'),
-            'add_new' => __('Add New', 'eastenddistrict'),
-            'add_new_item' => __('Add New East End District Custom Post', 'eastenddistrict'),
-            'edit' => __('Edit', 'eastenddistrict'),
-            'edit_item' => __('Edit East End District Custom Post', 'eastenddistrict'),
-            'new_item' => __('New East End District Custom Post', 'eastenddistrict'),
-            'view' => __('View East End District Custom Post', 'eastenddistrict'),
-            'view_item' => __('View East End District Custom Post', 'eastenddistrict'),
-            'search_items' => __('Search East End District Custom Post', 'eastenddistrict'),
-            'not_found' => __('No East End District Custom Posts found', 'eastenddistrict'),
-            'not_found_in_trash' => __('No East End District Custom Posts found in Trash', 'eastenddistrict')
-        ),
-        'public' => true,
-        'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
-        'has_archive' => true,
-        'supports' => array(
-            'title',
-            'editor',
-            'excerpt',
-            'thumbnail'
-        ), // Go to Dashboard Custom East End District post for supports
-        'can_export' => true, // Allows export in Tools > Export
-        'taxonomies' => array(
-            'post_tag',
-            'category'
-        ) // Add Category and Post Tags support
-    ));
-}
-
-
-function html5_image_size_names( $sizes ) {
-    $sizes['extra-large'] = __( 'Extra Large', 'eastenddistrict' );
-    $sizes['gallery-thumbnail'] = __( 'Gallery Thumbnail', 'eastenddistrict' );
-    $sizes['hero'] = __( 'Hero Image', 'eastenddistrict' );
-    return $sizes;
-}
-add_filter( 'image_size_names_choose', 'html5_image_size_names', 11, 1 );
-
-/*------------------------------------*\
-	ShortCode Functions
-\*------------------------------------*/
-
-// Shortcode Demo with Nested Capability
-function html5_shortcode_demo($atts, $content = null)
-{
-    return '<div class="shortcode-demo">' . do_shortcode($content) . '</div>'; // do_shortcode allows for nested Shortcodes
-}
-
-// Shortcode Demo with simple <h2> tag
-function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 shortcode, allows for nesting within above element. Fully expandable.
-{
-    return '<h2>' . $content . '</h2>';
 }
 
 /*------------------------------------*\

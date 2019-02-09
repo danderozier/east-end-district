@@ -14,10 +14,6 @@
 			$(this).parent().toggleClass('is-open');
 		}).insertAfter('.nav > ul > .menu-item > a');
 
-		// $('.nav ul > .menu-item > a').insert
-
-		// DOM ready, take it away
-
 	});
 
 })(jQuery, this);
